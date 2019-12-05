@@ -6,42 +6,34 @@ from dotenv import load_dotenv
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
-import requests 
-from bs4 import BeautifulSoup
-import re
-import urllib.request
-from urllib.request import urlretrieve
+
 
 from fsm import TocMachine
 from utils import send_text_message
 
-#
-opener=urllib.request.build_opener()
-opener.addheaders=[('User-Agent','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1941.0 Safari/537.36')]
-urllib.request.install_opener(opener)
-#
+
 
 load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "state1", "state2"],
+    states=["user", "board", "article"],
     transitions=[
         {
             "trigger": "advance",
             "source": "user",
-            "dest": "state1",
-            "conditions": "is_going_to_state1",
+            "dest": "board",
+            "conditions": "is_going_to_board",
         },
         {
             "trigger": "advance",
-            "source": "state1",
-            "dest": "state2",
-            "conditions": "is_going_to_state2",
+            "source": "board",
+            "dest": "article",
+            "conditions": "is_going_to_article",
         },
         {
             "trigger": "go_back",
-            "source": ["state1", "state2"],
+            "source": ["board", "article"],
             "dest": "user"
         },
     ],
@@ -119,7 +111,7 @@ def webhook_handler():
         print(f"REQUEST BODY: \n{body}")
         response = machine.advance(event)
         if response == False:
-            send_text_message(event.reply_token, "Not Entering any State")
+            send_text_message(event.reply_token, "請輸入要抓取的看板(不輸入即為全部文章,校版請輸入校名縮寫)：\n1：美妝版 2：穿搭版 3：網購版 4：感情版 5：心情版 6：閒聊版 7：女孩版\n8：有趣版 9：彩虹版 10：追星版 11：攝影版 12：美食版 13：旅遊版 14：動漫板")
 
     return "OK"
 
