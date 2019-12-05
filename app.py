@@ -6,9 +6,20 @@ from dotenv import load_dotenv
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
+import requests 
+from bs4 import BeautifulSoup
+import re
+import urllib.request
+from urllib.request import urlretrieve
 
 from fsm import TocMachine
 from utils import send_text_message
+
+#
+opener=urllib.request.build_opener()
+opener.addheaders=[('User-Agent','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1941.0 Safari/537.36')]
+urllib.request.install_opener(opener)
+#
 
 load_dotenv()
 
@@ -24,11 +35,15 @@ machine = TocMachine(
         },
         {
             "trigger": "advance",
-            "source": "user",
+            "source": "state1",
             "dest": "state2",
             "conditions": "is_going_to_state2",
         },
-        {"trigger": "go_back", "source": ["state1", "state2"], "dest": "user"},
+        {
+            "trigger": "go_back",
+            "source": ["state1", "state2"],
+            "dest": "user"
+        },
     ],
     initial="user",
     auto_transitions=False,
