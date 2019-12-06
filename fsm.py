@@ -23,10 +23,6 @@ class TocMachine(GraphMachine):
         match = re.fullmatch(r'[a-z]* [1-9]*', text)
         if(match != None):
             return True
-
-    def is_going_to_article(self, event):
-        text = event.message.text
-        return text.lower() == "go to state2"
     
     def is_going_to_index(self, event):
         text = event.message.text
@@ -64,16 +60,6 @@ class TocMachine(GraphMachine):
 
     def on_exit_board(self):
         print("Leaving board")
-
-    def on_enter_article(self, event):
-        print("I'm entering article")
-
-        reply_token = event.reply_token
-        send_text_message(reply_token, "Trigger article")
-        self.go_back()
-
-    def on_exit_article(self):
-        print("Leaving article")
 
     def on_enter_index(self, event):
         print("I'm entering index")
