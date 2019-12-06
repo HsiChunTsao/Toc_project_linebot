@@ -33,7 +33,7 @@ class TocMachine(GraphMachine):
         a = event.message.text.split(" ",1)
         print(a[0])
         url = 'https://www.dcard.tw/f/'+a[0]
-        if(int(a[1]) >= 30):
+        if(int(a[1]) > 30):
             reply_token = event.reply_token
             userID = event.source.user_id
             send_text_message(userID, "抓太多囉")
