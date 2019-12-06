@@ -35,7 +35,8 @@ class TocMachine(GraphMachine):
         url = 'https://www.dcard.tw/f/'+a[0]
         if(int(a[1]) > 30):
             reply_token = event.reply_token
-            send_text_message(reply_token, "抓太多囉")
+            userID = event.source.userId
+            send_text_message(userID, "抓太多囉")
             self.go_back()
         else:
             reg_imgur_file  = re.compile('http[s]://imgur.dcard.tw/\w+\.(?:jpg|png|gif)')
@@ -47,14 +48,15 @@ class TocMachine(GraphMachine):
             for art in articles[:int(a[1])]:
                 art2 = articles2[x]
                 reply_token = event.reply_token
-                send_text_message(reply_token, art.text + "\n" +'https://www.dcard.tw'+art2['href'])
+                userID = event.source.userId
+                send_text_message(userID, art.text + "\n" +'https://www.dcard.tw'+art2['href'])
                 print(art.text)
                 print('https://www.dcard.tw'+art2['href'])
                 res = requests.get('https://www.dcard.tw'+art2['href'])
                 images = reg_imgur_file.findall(res.text)
                 print(images)
                 for image in set(images):
-                        send_image_message(reply_token, image, image)
+                        send_image_message(userID, image, image)
                 x = x+1
             self.go_back()
 
@@ -63,9 +65,9 @@ class TocMachine(GraphMachine):
 
     def on_enter_index(self, event):
         print("I'm entering index")
-
+        userID = event.source.userId
         reply_token = event.reply_token
-        send_text_message(reply_token, 
+        send_text_message(userID, 
         "美妝：makeup\n穿搭：dressup\n梗圖：meme\n彩虹：rainbow\n追星：entertainer\n手作：handicrafts\n插圖：illustration\n攝影：photography\n汽機車：vehicle\n重機：heavy_motorcycle\n美食：food\n旅遊：travel\n學校請輸入校名縮寫(例：成大 ncku)"
         )
         self.go_back()
