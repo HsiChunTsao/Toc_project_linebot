@@ -58,7 +58,7 @@ class TocMachine(GraphMachine):
                 for image in set(images):
                         ID = re.search('http[s]://imgur.dcard.tw/(\w+\.(?:jpg|png|gif))',image).group(1)
                         print(ID)
-                        send_image_message(reply_token, image)
+                        send_image_message(reply_token, image, image)
                 x = x+1
             self.go_back()
 
@@ -79,8 +79,8 @@ class TocMachine(GraphMachine):
         print("I'm entering index")
 
         reply_token = event.reply_token
-        send_text_message(reply_token, "Trigger index")
-        send_image_message(reply_token, "https://imgur.dcard.tw/QcbRYCc.jpg")
+        #send_text_message(reply_token, "Trigger index")
+        send_image_message(reply_token, "https://imgur.dcard.tw/QcbRYCc.jpg", "https://imgur.dcard.tw/QcbRYCc.jpg")
         self.go_back()
 
     def on_exit_index(self):
