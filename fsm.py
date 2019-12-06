@@ -32,7 +32,9 @@ class TocMachine(GraphMachine):
 
     def on_enter_board(self, event):
         print("I'm entering board")
-
+        a = event.message.text.split(" ",1)
+        print(a[0])
+        url = 'https://www.dcard.tw/'+a[0]
         reply_token = event.reply_token
         send_text_message(reply_token, "Trigger board")
         self.go_back()
