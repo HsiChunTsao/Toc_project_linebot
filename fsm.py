@@ -46,7 +46,6 @@ class TocMachine(GraphMachine):
             x = 0
             for art in articles[:int(a[1])]:
                 art2 = articles2[x]
-                reply_token = event.reply_token
                 userID = event.source.user_id
                 send_text_message(userID, art.text + "\n" +'https://www.dcard.tw'+art2['href'])
                 print(art.text)
