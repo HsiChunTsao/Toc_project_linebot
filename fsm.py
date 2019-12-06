@@ -1,6 +1,6 @@
 from transitions.extensions import GraphMachine
 
-from utils import send_text_message
+from utils import send_text_message, send_image_message
 
 import requests 
 from bs4 import BeautifulSoup
@@ -20,7 +20,8 @@ class TocMachine(GraphMachine):
 
     def is_going_to_board(self, event):
         text = event.message.text
-        return text.lower() == "go to state1"
+        #return text.lower() == "go to state1"
+        return True
 
     def is_going_to_article(self, event):
         text = event.message.text
@@ -34,10 +35,34 @@ class TocMachine(GraphMachine):
         print("I'm entering board")
         a = event.message.text.split(" ",1)
         print(a[0])
-        url = 'https://www.dcard.tw/'+a[0]
-        reply_token = event.reply_token
-        send_text_message(reply_token, "Trigger board")
-        self.go_back()
+        url = 'https://www.dcard.tw/f/'+a[0]
+        if(int(a[1]) > 30):
+            reply_token = event.reply_token
+            send_text_message(reply_token, "抓太多囉")
+            self.go_back()
+        else:
+            reg_imgur_file  = re.compile('http[s]://imgur.dcard.tw/\w+\.(?:jpg|png|gif)')
+            res = requests.get(url)
+            soup = BeautifulSoup(res.text,'html.parser')
+            articles = soup.select('div.NormalPostLayout__TitleWrapper-sc-1kpmwi8-4.eSrfAB h3')
+            articles2 =  soup.select('div.PostList_entry_1rq5Lf a')
+            x = 0
+            for art in articles[:int(a[1])]:
+                art2 = articles2[x]
+                reply_token = event.reply_token
+                send_text_message(reply_token, art.text + 'https://www.dcard.tw/'+art2['href'])
+                print(art.text)
+                print('https://www.dcard.tw/'+art2['href'])
+                res = requests.get('https://www.dcard.tw'+art2['href'])
+                images = reg_imgur_file.findall(res.text)
+                print(images)
+                for image in set(images):
+                        ID = re.search('http[s]://imgur.dcard.tw/(\w+\.(?:jpg|png|gif))',image).group(1)
+                        print(ID)
+                        reply_token = event.reply_token
+                        send_image_message(reply_token, ID)
+                x = x+1
+            self.go_back()
 
     def on_exit_board(self):
         print("Leaving board")
