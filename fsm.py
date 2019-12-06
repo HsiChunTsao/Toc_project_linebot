@@ -56,8 +56,6 @@ class TocMachine(GraphMachine):
                 images = reg_imgur_file.findall(res.text)
                 print(images)
                 for image in set(images):
-                        ID = re.search('http[s]://imgur.dcard.tw/(\w+\.(?:jpg|png|gif))',image).group(1)
-                        print(ID)
                         send_image_message(reply_token, image, image)
                 x = x+1
             self.go_back()
