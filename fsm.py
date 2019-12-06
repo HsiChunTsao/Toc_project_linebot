@@ -42,7 +42,7 @@ class TocMachine(GraphMachine):
             reg_imgur_file  = re.compile('http[s]://imgur.dcard.tw/\w+\.(?:jpg|png|gif)')
             res = requests.get(url)
             soup = BeautifulSoup(res.text,'html.parser')
-            articles = soup.select('div.NormalPostLayout__TitleWrapper-sc-1kpmwi8-4.eSrfAB h3.Title__Text-v196i6-0 gmfDU')
+            articles = soup.select('div.NormalPostLayout__TitleWrapper-sc-1kpmwi8-4.eSrfAB h3.Title__Text-v196i6-0.gmfDU')
             articles2 =  soup.select('div.PostList_entry_1rq5Lf a.PostEntry_root_V6g0rd')
             x = 0
             for art in articles[:int(a[1])]:
