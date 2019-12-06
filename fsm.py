@@ -20,7 +20,7 @@ class TocMachine(GraphMachine):
 
     def is_going_to_board(self, event):
         text = event.message.text
-        match = re.fullmatch(r'([a-z]*|[a-z]*_[a-z]*) [1-9]*', text)
+        match = re.fullmatch(r'([a-z]*|[a-z]*_[a-z]*) [0-9]*', text)
         if(match != None):
             return True
     
