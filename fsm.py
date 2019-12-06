@@ -79,8 +79,9 @@ class TocMachine(GraphMachine):
         print("I'm entering index")
 
         reply_token = event.reply_token
-        #send_text_message(reply_token, "Trigger index")
-        send_image_message(reply_token, "https://imgur.dcard.tw/QcbRYCc.jpg", "https://imgur.dcard.tw/QcbRYCc.jpg")
+        send_text_message(reply_token, 
+        "美妝：makeup\n穿搭：dressup\n梗圖：meme\n彩虹：rainbow\n追星：entertainer\n手作：handicrafts\n插圖：illustration\n攝影：photography\n汽機車：vehicle\n重機：heavy_motorcycle\n美食：food\n旅遊：travel\n學校請輸入校名縮寫(例：成大 ncku)"
+        )
         self.go_back()
 
     def on_exit_index(self):

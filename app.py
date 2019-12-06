@@ -117,7 +117,7 @@ def webhook_handler():
         print(f"REQUEST BODY: \n{body}")
         response = machine.advance(event)
         if response == False:
-            send_text_message(event.reply_token, "請輸入要抓取的看板代碼：\n並輸入要抓取前幾篇熱門文章的圖片")
+            send_text_message(event.reply_token, "請輸入要抓取的看板代碼：\n並輸入要抓取前幾篇熱門文章的圖片(至多30篇)\nEx:抓取攝影版前兩篇文章圖片則輸入：\nphotography 2\n可輸入index查詢看板代碼")
 
     return "OK"
 
