@@ -55,8 +55,8 @@ app = Flask(__name__, static_url_path="")
 #    print("Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.")
 #    sys.exit(1)
 
-line_bot_api = LineBotApi('rqTvQHR8zykMeK9JabttA/4zIamYvO/+rbyFwFowPh4Y+d/uQPYIe1+tDGI/rwNP9pPtCePJtHBGfOIsAB1PkBqBfCy4hbROe5pWUKB5gysgmUSe66MTaWAF//NlCs/nbKQIa0gaevlkY8HO/BjCTgdB04t89/1O/w1cDnyilFU=')
-parser = WebhookParser('8df563b29b25b47e584a7b76f952f300')
+line_bot_api = LineBotApi('wOqAo4vLG22WznL32Drzi/KWNskOwRWP+H/kcPgyM7dymPwBqKAb+U9rL3I38L30rWM1tbafSt/oK54o+pFs8pVP52kdvALZB68E8ezrVF4gWXDHFAEZmLnjt0ejphDZVjB908obbu5Y/R4XWbeKQwdB04t89/1O/w1cDnyilFU=')
+parser = WebhookParser('00464549e4c2c5aa26296ae6aeec6494')
 
 
 @app.route("/callback", methods=["POST"])
