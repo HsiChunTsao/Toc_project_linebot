@@ -34,7 +34,6 @@ class TocMachine(GraphMachine):
         print(a[0])
         url = 'https://www.dcard.tw/f/'+a[0]
         if(int(a[1]) > 30):
-            reply_token = event.reply_token
             userID = event.source.user_id
             send_text_message(userID, "抓太多囉")
             self.go_back()
@@ -66,7 +65,6 @@ class TocMachine(GraphMachine):
     def on_enter_index(self, event):
         print("I'm entering index")
         userID = event.source.user_id
-        reply_token = event.reply_token
         send_text_message(userID, 
         "美妝：makeup\n穿搭：dressup\n梗圖：meme\n彩虹：rainbow\n追星：entertainer\n手作：handicrafts\n插圖：illustration\n攝影：photography\n汽機車：vehicle\n重機：heavy_motorcycle\n美食：food\n旅遊：travel\n學校請輸入校名縮寫(例：成大 ncku)"
         )
