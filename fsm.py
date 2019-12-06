@@ -20,8 +20,7 @@ class TocMachine(GraphMachine):
 
     def is_going_to_board(self, event):
         text = event.message.text
-        #return text.lower() == "go to state1"
-        return True
+        return text.lower() != "index"
 
     def is_going_to_article(self, event):
         text = event.message.text
