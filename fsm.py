@@ -20,7 +20,9 @@ class TocMachine(GraphMachine):
 
     def is_going_to_board(self, event):
         text = event.message.text
-        return text.lower() == "photography 2"
+        match = re.fullmatch(r'[a-z]* [1-9]*', text)
+        if(match != None):
+            return True
 
     def is_going_to_article(self, event):
         text = event.message.text
