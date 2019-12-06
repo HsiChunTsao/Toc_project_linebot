@@ -50,9 +50,9 @@ class TocMachine(GraphMachine):
             for art in articles[:int(a[1])]:
                 art2 = articles2[x]
                 reply_token = event.reply_token
-                send_text_message(reply_token, art.text + 'https://www.dcard.tw/'+art2['href'])
+                send_text_message(reply_token, art.text + 'https://www.dcard.tw'+art2['href'])
                 print(art.text)
-                print('https://www.dcard.tw/'+art2['href'])
+                print('https://www.dcard.tw'+art2['href'])
                 res = requests.get('https://www.dcard.tw'+art2['href'])
                 images = reg_imgur_file.findall(res.text)
                 print(images)
@@ -60,7 +60,7 @@ class TocMachine(GraphMachine):
                         ID = re.search('http[s]://imgur.dcard.tw/(\w+\.(?:jpg|png|gif))',image).group(1)
                         print(ID)
                         reply_token = event.reply_token
-                        send_image_message(reply_token, ID)
+                        send_image_message(reply_token, 'https://imgur.dcard.tw/' + ID)
                 x = x+1
             self.go_back()
 
