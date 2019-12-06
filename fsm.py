@@ -46,7 +46,7 @@ class TocMachine(GraphMachine):
             res = requests.get(url)
             soup = BeautifulSoup(res.text,'html.parser')
             articles = soup.select('div.NormalPostLayout__TitleWrapper-sc-1kpmwi8-4.eSrfAB h3')
-            articles2 =  soup.select('div.PostList_entry_1rq5Lf a')
+            articles2 =  soup.select('div.PostList_entry_1rq5Lf a.PostEntry_root_V6g0rd')
             x = 0
             for art in articles[:int(a[1])]:
                 art2 = articles2[x]
