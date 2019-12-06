@@ -5,10 +5,6 @@
 ![fsm](./img/fsm.png)
 
 ## Usage
-The initial state is set to `user`.
-
-Every time `user` state is triggered to `advance` to another state, it will `go_back` to `user` state after the bot replies corresponding message.
-
 * user
 	* Input: "看板名稱 抓取數量"
 		* Reply: "該文章標題與連結，及文章裡所有的圖片"
