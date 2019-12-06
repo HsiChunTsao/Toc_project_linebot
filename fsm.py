@@ -24,7 +24,14 @@ class TocMachine(GraphMachine):
 
     def is_going_to_article(self, event):
         text = event.message.text
-        return text.lower() == "go to state2"
+        if(self.machine.state == "board"):
+            return text.lower() == "go to state2"
+        else:
+            return False
+    
+    def is_going_to_index(self, event):
+        text = event.message.text
+        return text.lower() == "index"
 
     def on_enter_board(self, event):
         print("I'm entering board")
@@ -45,3 +52,13 @@ class TocMachine(GraphMachine):
 
     def on_exit_article(self):
         print("Leaving article")
+
+    def on_enter_index(self, event):
+        print("I'm entering index")
+
+        reply_token = event.reply_token
+        send_text_message(reply_token, "Trigger index")
+        self.go_back()
+
+    def on_exit_index(self):
+        print("Leaving index")
