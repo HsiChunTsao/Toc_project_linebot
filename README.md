@@ -1,3 +1,6 @@
+## Dcard_crawler
+此機器人可以抓取特定看板中的熱門文章圖片
+
 ## Finite State Machine
 ![fsm](./img/fsm.png)
 
